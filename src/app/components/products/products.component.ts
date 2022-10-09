@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { switchMap } from 'rxjs/operators';
+import { zip } from 'rxjs';
 
 import {
   Product,
@@ -33,6 +35,7 @@ export class ProductsComponent implements OnInit {
   };
   limit: number = 10;
   offset: number = 0;
+  statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
 
   constructor(
     private storeService: StoreService,
@@ -59,11 +62,38 @@ export class ProductsComponent implements OnInit {
   }
 
   onShowDetail(id: string) {
-    this.productsService.getProduct(id).subscribe((data) => {
-      console.log('Product', data);
-      this.toggleProductDetail();
-      this.productChosen = data;
-    });
+    this.statusDetail = 'loading';
+    this.productsService.getProduct(id).subscribe(
+      (data) => {
+        this.toggleProductDetail();
+        this.productChosen = data;
+        this.statusDetail = 'success';
+      },
+      (errorMsg) => {
+        console.log('Error', errorMsg);
+        this.statusDetail = 'error';
+      }
+    );
+  }
+
+  readAndUpdate(id: string) {
+    this.productsService
+      .getProduct(id)
+      .pipe(
+        switchMap((product) =>
+          this.productsService.update(product.id, { title: 'change' })
+        )
+      )
+      .subscribe((data) => {
+        console.log(data);
+      });
+    //para usar en vez del PromiseALL
+    this.productsService
+      .fetchReadAndUpdate(id, { title: 'change' })
+      .subscribe((response) => {
+        const read = response[0];
+        const update = response[1];
+      });
   }
 
   createNewProduct() {
