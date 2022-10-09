@@ -1,3 +1,4 @@
+import { TokenInterceptor } from './interceptors/token.interceptor';
 import { TimeInterceptor } from './interceptors/time.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -37,6 +38,11 @@ import { HighlightDirective } from './directives/highlight.directive';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TimeInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
       multi: true,
     },
   ],
