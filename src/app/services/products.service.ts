@@ -7,6 +7,7 @@ import {
 } from '@angular/common/http';
 import { catchError, map, retry } from 'rxjs/operators';
 import { throwError, zip } from 'rxjs';
+import { checkTime } from '../interceptors/time.interceptor';
 
 import {
   Product,
@@ -28,17 +29,19 @@ export class ProductsService {
       params = params.set('limit', limit);
       params = params.set('offset', offset);
     }
-    return this.http.get<Product[]>(this.apiURL, { params }).pipe(
-      retry(3),
-      map((products) =>
-        products.map((item) => {
-          return {
-            ...item,
-            taxes: 0.12 * item.price,
-          };
-        })
-      )
-    );
+    return this.http
+      .get<Product[]>(this.apiURL, { params, context: checkTime() })
+      .pipe(
+        retry(3),
+        map((products) =>
+          products.map((item) => {
+            return {
+              ...item,
+              taxes: 0.12 * item.price,
+            };
+          })
+        )
+      );
   }
 
   fetchReadAndUpdate(id: string, dto: UpdateProductDTO) {

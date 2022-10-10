@@ -17,12 +17,14 @@ specifiers:
   '@angular/platform-browser': ~12.1.2
   '@angular/platform-browser-dynamic': ~12.1.2
   '@angular/router': ~12.1.2
+  '@types/file-saver': ^2.0.5
   '@types/jasmine': ~3.8.0
   '@types/node': ^12.11.1
   '@typescript-eslint/eslint-plugin': 4.28.2
   '@typescript-eslint/parser': 4.28.2
   date-fns: ^2.23.0
   eslint: ^7.26.0
+  file-saver: ^2.0.5
   jasmine-core: ~3.8.0
   karma: ~6.3.0
   karma-chrome-launcher: ~3.1.0
@@ -45,6 +47,7 @@ dependencies:
   '@angular/platform-browser-dynamic': 12.1.5_pdvmkyjblfyyallivogj6rssge
   '@angular/router': 12.1.5_ce25ntn25xrikpwwdud4yfgoyu
   date-fns: 2.29.3
+  file-saver: 2.0.5
   rxjs: 6.6.7
   swiper: 8.4.3
   tslib: 2.4.0
@@ -59,6 +62,7 @@ devDependencies:
   '@angular-eslint/template-parser': 12.3.1_p5gdt4k33weoikbhgnh77z3p3m
   '@angular/cli': 12.1.4
   '@angular/compiler-cli': 12.1.5_7k6mu7mk2haxtscqmfxc3pl6am
+  '@types/file-saver': 2.0.5
   '@types/jasmine': 3.8.2
   '@types/node': 12.20.55
   '@typescript-eslint/eslint-plugin': 4.28.2_jjppooozhfca7ti5oinc4kjwcm
@@ -2029,6 +2033,10 @@ packages:
 
   /@types/estree/0.0.50:
     resolution: {integrity: sha512-C6N5s2ZFtuZRj54k2/zyRhNDjJwwcViAM3Nbm8zjBpbqAdZ00mr0CFxvSKeO8Y/e03WVFLpQMdHYVfUd6SB+Hw==}
+    dev: true
+
+  /@types/file-saver/2.0.5:
+    resolution: {integrity: sha512-zv9kNf3keYegP5oThGLaPk8E081DFDuwfqjtiTzm6PoxChdJ1raSuADf2YGCVIyrSynLrgc8JWv296s7Q7pQSQ==}
     dev: true
 
   /@types/glob/7.2.0:
@@ -4442,6 +4450,10 @@ packages:
     dependencies:
       flat-cache: 3.0.4
     dev: true
+
+  /file-saver/2.0.5:
+    resolution: {integrity: sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA==}
+    dev: false
 
   /file-uri-to-path/1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
