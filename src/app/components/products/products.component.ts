@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
 import { zip } from 'rxjs';
 
@@ -16,10 +16,11 @@ import { ProductsService } from '../../services/products.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   myShoppingCart: Product[] = [];
   total = 0;
-  products: Product[] = [];
+  @Input() products: Product[] = [];
+  @Output() loadMore = new EventEmitter();
   showProductDetail: boolean = false;
   productChosen: Product = {
     id: '',
@@ -33,8 +34,6 @@ export class ProductsComponent implements OnInit {
     },
     description: '',
   };
-  limit: number = 10;
-  offset: number = 0;
   statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
 
   constructor(
@@ -42,14 +41,6 @@ export class ProductsComponent implements OnInit {
     private productsService: ProductsService
   ) {
     this.myShoppingCart = this.storeService.getShoppingCart();
-  }
-
-  ngOnInit(): void {
-    this.productsService
-      .getAllProducts(this.limit, this.offset)
-      .subscribe((data) => {
-        this.products = data;
-      });
   }
 
   onAddToShoppingCart(product: Product) {
@@ -63,9 +54,9 @@ export class ProductsComponent implements OnInit {
 
   onShowDetail(id: string) {
     this.statusDetail = 'loading';
+    this.toggleProductDetail();
     this.productsService.getProduct(id).subscribe(
       (data) => {
-        this.toggleProductDetail();
         this.productChosen = data;
         this.statusDetail = 'success';
       },
@@ -126,22 +117,19 @@ export class ProductsComponent implements OnInit {
   }
 
   deleteProduct() {
-    const id = this.productChosen.id;
-    this.productsService.delete(id).subscribe(() => {
-      const productIndex = this.products.findIndex(
-        (item) => item.id === this.productChosen.id
-      );
-      this.products.splice(productIndex, 1);
-      this.showProductDetail = false;
-    });
+    if (this.productChosen) {
+      const id = this.productChosen?.id;
+      this.productsService.delete(id).subscribe(() => {
+        const productIndex = this.products.findIndex(
+          (item) => item.id === this.productChosen?.id
+        );
+        this.products.splice(productIndex, 1);
+        this.showProductDetail = false;
+      });
+    }
   }
 
-  loadMore() {
-    this.productsService
-      .getAllProducts(this.limit, this.offset)
-      .subscribe((data) => {
-        this.products = this.products.concat(data);
-        this.offset += this.limit;
-      });
+  onLoadMore() {
+    this.loadMore.emit();
   }
 }

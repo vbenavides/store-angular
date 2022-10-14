@@ -1,5 +1,5 @@
-<button (click)="createNewProduct()">create</button>
-<button (click)="onShowDetail('1231232')">Detalle not found</button>
+<!-- <button (click)="createNewProduct()">create</button>
+<button (click)="onShowDetail('1231232')">Detalle not found</button> -->
 <div class="products--grid">
   <app-product
     [product]="product"
@@ -7,7 +7,7 @@
     (addedProduct)="onAddToShoppingCart($event)"
     (showProduct)="onShowDetail($event)"
   ></app-product>
-  <button (click)="loadMore()">Load More</button>
+  <button (click)="onLoadMore()">Load More</button>
 </div>
 <div class="product-detail" [class.active]="showProductDetail">
   {{ statusDetail }}
