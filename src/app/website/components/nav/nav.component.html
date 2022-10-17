@@ -45,7 +45,10 @@
         <button *ngIf="!profile; else elseLogin" (click)="login()">
           Login
         </button>
-        <ng-template #elseLogin>{{ profile?.email }}</ng-template>
+        <ng-template #elseLogin>
+          <a routerLink="/profile">{{ profile?.email }}</a>
+          <button (click)="logout()">Logout</button>
+        </ng-template>
       </div>
       <div class="cart">
         <a href="">
