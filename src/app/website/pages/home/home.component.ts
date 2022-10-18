@@ -10,7 +10,7 @@ import { Product } from 'src/app/models/product.model';
 })
 export class HomeComponent implements OnInit {
   products: Product[] = [];
-  limit: number = 10;
+  limit: number = 12;
   offset: number = 0;
   productId: string | null = null;
 
