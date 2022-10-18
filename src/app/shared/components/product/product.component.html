@@ -5,10 +5,18 @@
       [img]="product.images[0]"
     ></app-img>
   </a>
-  <h2>{{ product.price | currency: "USD" }}</h2>
-  <p>{{ product.title }}</p>
-  <!-- <p>Iva {{ product?.taxes | currency: "USD" }}</p> -->
-  <!-- <button (click)="onShowDetail()">Ver detalles</button> -->
-  <a routerLink="." [queryParams]="{ product: product.id }">Ver detalle</a>
-  <button (click)="onAddToCart()">Add cart</button>
+  <div class="product-info-wrapper">
+    <div class="product-info">
+      <h2>${{ product.price }}</h2>
+      <p>{{ product.title }}</p>
+    </div>
+    <!-- <p>Iva {{ product?.taxes | currency: "USD" }}</p> -->
+    <!-- <button (click)="onShowDetail()">Ver detalles</button> -->
+    <div class="cart-fn">
+      <a routerLink="." [queryParams]="{ product: product.id }">Details</a>
+      <figure class="add-to-cart-img" (click)="onAddToCart()">
+        <img src="../../../../assets/logos/bt_add_to_cart.svg" alt="" />
+      </figure>
+    </div>
+  </div>
 </div>

@@ -14,4 +14,39 @@ h2 {
   .img-link {
     width: 100%;
   }
+  .product-info-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .product-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    line-height: 22px;
+    padding: 2% 5%;
+  }
+  .cart-fn {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    align-items: center;
+    padding: 0 5%;
+    & a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: white;
+      background-color: #acd9b2;
+      padding: 5%;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+  }
+  .add-to-cart-img {
+    cursor: pointer;
+  }
 }
