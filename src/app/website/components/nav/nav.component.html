@@ -42,7 +42,7 @@
     </nav>
     <div class="info">
       <div class="account">
-        <button *ngIf="!profile; else elseLogin" (click)="login()">
+        <button *ngIf="!profile; else elseLogin" routerLink="login">
           Login
         </button>
         <ng-template #elseLogin>

@@ -18,6 +18,7 @@ import { Category } from 'src/app/models/category.model';
 export class NavComponent implements OnInit {
   activeMenu = false;
   counter = 0;
+  // Profile: User | null = this.authService.user$;
   profile: User | null = null;
   categories: Category[] = [];
 
@@ -32,6 +33,9 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     this.storeService.myCart$.subscribe((products) => {
       this.counter = products.length;
+    });
+    this.authService.user$.subscribe((user) => {
+      this.profile = user;
     });
     this.getAllCategories();
     this.authService.user$.subscribe((data) => (this.profile = data));

@@ -1,1 +1,53 @@
-<p>login works!</p>
+<div class="login">
+  <div class="login__form-container">
+    <img
+      src="../../../../assets/logos/logo_yard_sale.svg"
+      alt="logo"
+      class="login__logo"
+    />
+
+    <form
+      #loginForm="ngForm"
+      (ngSubmit)="onSubmit(loginForm)"
+      class="login__form"
+    >
+      <label for="email" class="label">Email address</label>
+      <input
+        type="text"
+        id="email"
+        name="email"
+        [(ngModel)]="loginFormModel.email"
+        required
+        #email="ngModel"
+        placeholder="platzi@example.cm"
+        class="input input-email"
+      />
+      <div [hidden]="email.valid || email.pristine">This field is required</div>
+      <label for="password" class="label">Password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="*********"
+        [(ngModel)]="loginFormModel.pass"
+        #passwd="ngModel"
+        name="password"
+        required
+        class="input input-password"
+      />
+      <div [hidden]="passwd.valid || passwd.pristine">
+        This field is required
+      </div>
+
+      <a href="/">Forgot my password</a>
+      <button
+        [disabled]="loginForm.invalid"
+        type="submit"
+        class="primary-button login-button"
+      >
+        Log in
+      </button>
+    </form>
+
+    <button class="secondary-button signup-button">Sign up</button>
+  </div>
+</div>
